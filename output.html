@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form Input Barang</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" 
+    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+</head>
+
+<body>
+    <table>
+        <tr>
+            <th>Kode</th>
+            <td id="output-kode"></td>
+        </tr>
+        <tr>
+            <th>Nama Barang</th>
+            <td id="output-nama-barang"></td>
+        </tr>
+        <tr>
+            <th>Kategori</th>
+            <td id="output-kategori"></td>
+        </tr>
+        <tr>
+            <th>Stok</th>
+            <td id="output-stok"></td>
+        </tr>
+        <tr>
+            <th>Harga</th>
+            <td id="output-harga"></td>
+        </tr>
+        <tr>
+            <th>Total Aset</th>
+            <td id="output-total-aset"></td>
+        </tr>
+    </table>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" 
+    integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" 
+    crossorigin="anonymous"></script>
+    
+    <script>
+        const params = new Proxy(new URLSearchParams(window.location.search),{get: (searchParams, prop) => searchParams.get(prop),
+        });
+
+        const { kode, kategori, stok, harga } = params      //proses destrukturisasi objek, tidak memungkinkan pakai "-"
+
+        /*Number (Math.round(Math.PI * (r ** 2) + 'e2') + 'e-2') //untuk pembulatan, bisa pakai ini atau yg bawah
+        const hargaMarkUp = harga * 1.5 */
+
+        const hargaMarkUp = new Number (Math.round(harga * 1.5 + 'e2') + 'e-2')
+
+        /*console.log(kode)
+        console.log(params["nama-barang"])
+        console.log(kategori)
+        console.log(stok)
+        console.log(harga)*/
+
+        document.getElementById('output-kode').innerHTML = kode
+        document.getElementById('output-nama-barang').innerHTML = params['nama-barang']
+        document.getElementById('output-kategori').innerHTML = kategori
+        document.getElementById('output-stok').innerHTML = stok
+        document.getElementById('output-harga').innerHTML = hargaMarkUp
+        document.getElementById('output-total-aset').innerHTML = hargaMarkUp * stok
+    </script>
+</body>
+
+</html>
